@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Videos by Duration</title>
+    <link rel="stylesheet" href="../styles/findVideosByDuration.css">
+</head>
+<body>
+
+<h1>Find Videos by Duration</h1>
+
+<form id="durationForm">
+    <label for="fromDuration">From Duration:</label>
+    <input type="number" id="fromDuration" name="fromDuration" step="0.01" required>
+    <label for="toDuration">To Duration:</label>
+    <input type="number" id="toDuration" name="toDuration" step="0.01" required>
+    <button type="submit" class="btn-find">Find Videos</button>
+</form>
+
+<table id="videos_table">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<a href="../index.html" class="link-primary">Inicio</a>
+
+<script>
+    document.getElementById('durationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        findVideosByDuration();
+    });
+
+    function findVideosByDuration() {
+        console.log("Finding videos by duration:");
+
+        var fromDuration = document.getElementById('fromDuration').value;
+        var toDuration = document.getElementById('toDuration').value;
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open('GET', 'http://localhost:8080/videos/duration?from=' + fromDuration + '&to=' + toDuration, true);
+
+        xhttp.onreadystatechange = function() {
+
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                var status = xhttp.status;
+                if (status === 0 || (status >= 200 && status < 400)) { // No hay errores
+                    var json = JSON.parse(xhttp.responseText);
+                    createTable(json, "videos_table");
+                } else {
+                    console.log("Error: " + xhttp.getResponseHeader("Error-Message"));
+                }
+            }
+        };
+        xhttp.send();
+    }
+
+    function createTable(json, table) {
+        var tableBody = document.getElementById(table).getElementsByTagName('tbody')[0];
+
+        // Limpiar las filas existentes
+        while (tableBody.rows.length > 0) {
+            tableBody.deleteRow(0);
+        }
+
+        // Crear nuevas filas con los datos
+        json.forEach((row) => {
+            var tr = document.createElement("tr");
+
+            var tdCode = document.createElement("td");
+            tdCode.textContent = row.code;
+            tr.appendChild(tdCode);
+
+            var tdTitle = document.createElement("td");
+            tdTitle.textContent = row.title;
+            tr.appendChild(tdTitle);
+
+            var tdDescription = document.createElement("td");
+            tdDescription.textContent = row.description;
+            tr.appendChild(tdDescription);
+
+            var tdDuration = document.createElement("td");
+            tdDuration.textContent = row.duration;
+            tr.appendChild(tdDuration);
+
+            tableBody.appendChild(tr);
+        });
+    }
+</script>
+</body>
+</html>

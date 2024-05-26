@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Buscar Por Titulo</title>
+    <link rel="stylesheet" href="../styles/findVideosByTittle.css">
 </head>
 <body>
 
@@ -11,7 +12,7 @@
 <form id="search_form">
     <label for="title">Título:</label>
     <input type="text" id="title" name="title" required>
-    <button type="submit">Buscar</button>
+    <button type="submit" class="btn-search">Buscar</button>
 </form>
 
 <table id="videos_table">
@@ -28,7 +29,7 @@
     </tbody>
 </table>
 
-<a href="../index.html">Inicio</a>
+<a href="../index.html" class="link-secondary">Volver al inicio</a>
 
 <script>
     document.getElementById('search_form').addEventListener('submit', function(event) {
@@ -105,6 +106,7 @@
 </script>
 </body>
 </html>
+
 
 
 
