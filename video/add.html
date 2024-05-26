@@ -13,8 +13,16 @@
 <form >
     <label for="code">Code:</label><br>
     <input type="text" id="code" name="code" value=""><br>
+
     <label for="title">Title:</label><br>
     <input type="text" id="title" name="title" value=""><br><br>
+
+    <label for="description">description:</label><br>
+    <input type="text" id="description" name="description" value=""><br><br>
+
+    <label for="duration">duration:</label><br>
+    <input type="number" id="duration" name="duration" value=""><br><br>
+
 
    <input type="button" value="Guardar" class="btn btn-primary" onclick="add();">
 </form>
@@ -37,10 +45,14 @@
 
         var code = document.getElementById("code");
         var title = document.getElementById("title");
+        var description = document.getElementById("description");
+        var duration = document.getElementById("duration");
 
         var newVideo = {
             "code": code.value,
-            "title": title.value
+            "title": title.value,
+            "description": description.value,
+            "duration": duration.value
         }
 
         console.log("Adding video:" + JSON.stringify(newVideo));

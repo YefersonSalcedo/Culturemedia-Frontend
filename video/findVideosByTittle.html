@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Por Titulo</title>
+</head>
+<body>
+
+<h1>Buscar Videos Por Titulo</h1>
+
+<form id="search_form">
+    <label for="title">Título:</label>
+    <input type="text" id="title" name="title" required>
+    <button type="submit">Buscar</button>
+</form>
+
+<table id="videos_table">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<a href="../index.html">Inicio</a>
+
+<script>
+    document.getElementById('search_form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        find_videos_by_title();
+    });
+
+    function find_videos_by_title() {
+        var title = document.getElementById('title').value.trim();
+        if (!title) {
+            alert("Por favor, ingrese un título para buscar.");
+            return;
+        }
+        console.log("Buscando videos con título:", title);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('GET', 'http://localhost:8080/videos/?title=' + encodeURIComponent(title), true);
+
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                var status = xhttp.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    var json = JSON.parse(xhttp.responseText);
+                    clearTable("videos_table"); // Limpiar la tabla antes de mostrar nuevos resultados
+                    if (json.length > 0) {
+                        createTable(json, "videos_table");
+                    } else {
+                        // Si no hay resultados, limpiar la tabla
+                        clearTable("videos_table");
+                    }
+                    // Limpiar el input después de la búsqueda
+                    document.getElementById('title').value = "";
+                } else {
+                    console.log("Error: " + status);
+                    alert("Hubo un error al realizar la búsqueda.");
+                }
+            }
+        };
+        xhttp.send();
+    }
+
+    function createTable(json, tableId) {
+        var tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+
+        json.forEach((row) => {
+            var tr = document.createElement("tr");
+
+            var tdCode = document.createElement("td");
+            tdCode.textContent = row.code;
+            tr.appendChild(tdCode);
+
+            var tdTitle = document.createElement("td");
+            tdTitle.textContent = row.title;
+            tr.appendChild(tdTitle);
+
+            var tdDescription = document.createElement("td");
+            tdDescription.textContent = row.description;
+            tr.appendChild(tdDescription);
+
+            var tdDuration = document.createElement("td");
+            tdDuration.textContent = row.duration;
+            tr.appendChild(tdDuration);
+
+            tableBody.appendChild(tr);
+        });
+    }
+
+    function clearTable(tableId) {
+        var tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+        while (tableBody.firstChild) {
+            tableBody.removeChild(tableBody.firstChild);
+        }
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+

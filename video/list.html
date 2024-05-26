@@ -11,15 +11,17 @@
 
     <table id="videos_table">
         <thead>
-        <td>Cod.</td>
+        <tr>
+            <th>Code</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Duration</th>
+        </tr>
         </thead>
-
     </table>
 
 
-    <a href="../index.html">
-        Inicio
-    </a>
+    <a href="../index.html">Inicio</a>
 </body>
 </html>
 
@@ -58,22 +60,27 @@
             tableBody.deleteRow(child-row);
         }
 
-        // Populate table
         json.forEach((row) => {
             var tr = document.createElement("tr");
-            Object.values(row).forEach((cell) => {
 
-                var td = document.createElement("td");
-                td.textContent = cell;
-                tr.appendChild(td);
+            var tdCode = document.createElement("td");
+            tdCode.textContent = row.code;
+            tr.appendChild(tdCode);
 
-            });
+            var tdTitle = document.createElement("td");
+            tdTitle.textContent = row.title;
+            tr.appendChild(tdTitle);
+
+            var tdDescription = document.createElement("td");
+            tdDescription.textContent = row.description;
+            tr.appendChild(tdDescription);
+
+            var tdDuration = document.createElement("td");
+            tdDuration.textContent = row.duration;
+            tr.appendChild(tdDuration);
 
             tableBody.appendChild(tr);
-
         });
-
-
     }
-
+    
 </script>
