@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     text-align: center;
+    background: #E9F1FA;
 }
 
 h1 {
@@ -14,11 +15,10 @@ form {
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
-input[type="text"],
-input[type="number"] {
+input[type="text"]{
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -27,7 +27,7 @@ input[type="number"] {
 
 button.btn-search {
     padding: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #007BFF;
@@ -36,7 +36,7 @@ button.btn-search {
 }
 
 button.btn-search:hover {
-    background-color: #0056b3;
+    background-color: #0038ff;
 }
 
 table {

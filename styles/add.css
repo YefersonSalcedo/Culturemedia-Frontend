@@ -3,6 +3,7 @@ body {
     margin: 20px auto;
     max-width: 600px;
     text-align: center;
+    background: #E9F1FA;
 }
 
 h2 {
@@ -18,13 +19,12 @@ form {
 
 label {
     display: block;
-    margin-bottom: 5px;
     text-align: left;
 }
 
 input[type="text"],
 input[type="number"] {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -46,34 +46,32 @@ input[type="number"] {
     display: block;
 }
 
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 .btn-primary,
 .link-secondary {
-    margin-top: 20px;
     padding: 10px 20px;
-    font-size: 18px;
+    font-size: 20px;
     color: #fff;
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
 }
 
-.btn-primary {
+
+.btn-primary, .link-secondary{
     background-color: #007BFF;
     border: none;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.btn-primary:hover,.link-secondary:hover {
+    background-color: #0038ff;
 }
 
-.link-secondary {
-    color: #007BFF;
-    border: 1px solid #007BFF;
-}
-
-.link-secondary:hover {
-    background-color: #e6f7ff;
-}
 
 
 
