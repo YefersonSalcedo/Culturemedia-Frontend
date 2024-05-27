@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar nota</title>
+    <title>Añadir video</title>
     <link rel="stylesheet" href="../styles/add.css">
 </head>
 <body>
@@ -21,10 +21,11 @@
     <label for="duration">Duration:</label><br>
     <input type="number" id="duration" name="duration" value=""><br><br>
 
-    <input type="button" value="Guardar" class="btn btn-primary" onclick="add();">
+    <div class="button-container">
+        <input type="button" value="Guardar" class="btn btn-primary" onclick="add();">
+        <a href="../index.html" class="link-secondary">Volver al inicio</a>
+    </div>
 </form>
-
-<a href="../index.html" class="link-secondary">Volver al inicio</a>
 
 <div id="message"></div>
 

@@ -2,10 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     text-align: center;
-}
-
-h1 {
-    color: #333;
+    background: #E9F1FA;
 }
 
 #videos_table {
@@ -25,8 +22,10 @@ h1 {
 }
 
 #videos_table td {
-    text-align: left;
+    background-color: rgba(223, 222, 222, 0.65);
+    text-align: center;
 }
+
 
 a.button {
     display: inline-block;
@@ -42,5 +41,5 @@ a.button {
 }
 
 a.button:hover {
-    background-color: #0056b3;
+    background-color: #0038ff;
 }

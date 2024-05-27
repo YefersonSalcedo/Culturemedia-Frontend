@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Content will be added by JavaScript -->
+    <!-- aqui se añaden el contenido que viene del javascript -->
     </tbody>
 </table>
 
@@ -52,12 +52,12 @@
     function createTable(json, tableId) {
         var tableBody = document.querySelector(`#${tableId} tbody`);
 
-        // Clear existing rows
+        // limpia las filas existentes
         while (tableBody.firstChild) {
             tableBody.removeChild(tableBody.firstChild);
         }
 
-        // Add new rows from JSON data
+        // Añade las nuevas filas
         json.forEach((row) => {
             var tr = document.createElement("tr");
 

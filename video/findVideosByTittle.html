@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Buscar Por Titulo</title>
+    <title>Buscar Por Título</title>
     <link rel="stylesheet" href="../styles/findVideosByTittle.css">
 </head>
 <body>
 
-<h1>Buscar Videos Por Titulo</h1>
+<h1>Buscar Videos Por Título</h1>
 
 <form id="search_form">
     <label for="title">Título:</label>
@@ -52,18 +52,30 @@
             if (xhttp.readyState === XMLHttpRequest.DONE) {
                 var status = xhttp.status;
                 if (status === 0 || (status >= 200 && status < 400)) {
-                    var json = JSON.parse(xhttp.responseText);
-                    clearTable("videos_table"); // Limpiar la tabla antes de mostrar nuevos resultados
-                    if (json.length > 0) {
-                        createTable(json, "videos_table");
+                    var responseText = xhttp.responseText;
+                    if (responseText) {
+                        try {
+                            var json = JSON.parse(responseText);
+                            clearTable("videos_table"); // Limpiar la tabla antes de mostrar nuevos resultados
+                            if (json.length > 0) {
+                                createTable(json, "videos_table");
+                            } else {
+                                // Si no hay resultados, limpiar la tabla
+                                clearTable("videos_table");
+                                alert("No se encontraron resultados.");
+                            }
+                        } catch (e) {
+                            console.error("Error parsing JSON response: ", e);
+                            alert("Error al interpretar la respuesta del servidor.");
+                        }
                     } else {
-                        // Si no hay resultados, limpiar la tabla
                         clearTable("videos_table");
+                        alert("No se encontraron resultados.");
                     }
                     // Limpiar el input después de la búsqueda
                     document.getElementById('title').value = "";
                 } else {
-                    console.log("Error: " + status);
+                    console.error("Error: " + status);
                     alert("Hubo un error al realizar la búsqueda.");
                 }
             }
@@ -106,10 +118,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
