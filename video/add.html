@@ -9,9 +9,6 @@
 <h2>Adiccionar Video</h2>
 
 <form>
-    <label for="code">Code:</label><br>
-    <input type="text" id="code" name="code" value=""><br>
-
     <label for="title">Title:</label><br>
     <input type="text" id="title" name="title" value=""><br><br>
 
@@ -31,17 +28,15 @@
 
 <script>
     function add() {
-        var xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
         xmlhttp.open("POST", "http://localhost:8080/videos", true);
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-        var code = document.getElementById("code").value;
         var title = document.getElementById("title").value;
         var description = document.getElementById("description").value;
         var duration = document.getElementById("duration").value;
 
         var newVideo = {
-            "code": code,
             "title": title,
             "description": description,
             "duration": duration
@@ -50,19 +45,24 @@
         console.log("Adding video:" + JSON.stringify(newVideo));
 
         xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                document.getElementById("message").innerHTML = "Video guardado";
-                document.getElementById("message").classList.add("show");
-                document.getElementById("code").value = "";
-                document.getElementById("title").value = "";
-                document.getElementById("description").value = "";
-                document.getElementById("duration").value = "";
+            if (xmlhttp.readyState === 4) {
+                if (xmlhttp.status === 201) {
+                    document.getElementById("message").innerHTML = "Video guardado";
+                    document.getElementById("message").classList.add("show");
+                    document.getElementById("title").value = "";
+                    document.getElementById("description").value = "";
+                    document.getElementById("duration").value = "";
+                } else {
+                    document.getElementById("message").innerHTML = "Error al guardar el video";
+                    document.getElementById("message").classList.add("error");
+                }
             }
         };
 
         xmlhttp.send(JSON.stringify(newVideo));
     }
 </script>
+
 </body>
 </html>
 
